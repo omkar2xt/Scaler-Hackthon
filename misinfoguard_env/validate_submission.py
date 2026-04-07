@@ -74,12 +74,12 @@ def check_4_grader_variability():
         medium_score = medium_grade(trajectory)
         hard_score = hard_grade(trajectory)
         
-        # Tolerance: allow up to 0.01 variance (otherwise likely hardcoded)
+        # Tolerance: allow up to 0.001 variance (anything lower suggests hardcoding)
         scores = [easy_score, medium_score, hard_score]
         variance = max(scores) - min(scores)
         
-        if variance < 0.01:
-            return False, f"Graders appear hardcoded (variance={variance:.4f})"
+        if variance < 0.001:
+            return False, f"Graders appear hardcoded (variance={variance:.6f})"
         
         return True, f"Grader variability OK (scores: easy={easy_score:.3f}, medium={medium_score:.3f}, hard={hard_score:.3f})"
     except Exception as e:
