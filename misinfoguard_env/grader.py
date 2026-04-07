@@ -9,7 +9,7 @@ from typing import Any, Protocol
 import numpy as np
 
 from agents.defender import HeuristicDefender
-from config import CONFIG, MisinfoGuardConfig
+from .config import CONFIG, MisinfoGuardConfig
 from environment import MisinfoGuardEnv
 
 

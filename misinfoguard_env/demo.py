@@ -7,7 +7,7 @@ import logging
 from typing import Any
 
 from agents.defender import HeuristicDefender
-from config import CONFIG
+from .config import CONFIG
 from environment import MisinfoGuardEnv
 
 logger = logging.getLogger(__name__)

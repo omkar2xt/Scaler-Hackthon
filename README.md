@@ -45,6 +45,8 @@ Scaler-Hackthon/
 
 ## Getting Started
 
+### Setup
+
 1. **Install dependencies:**
 ```bash
 cd misinfoguard_env

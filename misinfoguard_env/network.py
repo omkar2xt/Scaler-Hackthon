@@ -8,7 +8,7 @@ from dataclasses import dataclass, field
 import networkx as nx
 import numpy as np
 
-from config import CONFIG, MisinfoGuardConfig
+from .config import CONFIG, MisinfoGuardConfig
 
 
 @dataclass

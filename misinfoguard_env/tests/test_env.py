@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from config import CONFIG
+from ..config import CONFIG
 from environment import MisinfoGuardEnv
 
 

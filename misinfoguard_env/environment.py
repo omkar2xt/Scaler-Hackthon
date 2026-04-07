@@ -9,9 +9,9 @@ import gymnasium as gym
 import numpy as np
 from gymnasium import spaces
 
-from config import CONFIG, MisinfoGuardConfig
-from network import PostSpreadState, SocialNetworkSimulator, build_post_feature_matrix
-from rewards import compute_reward
+from .config import CONFIG, MisinfoGuardConfig
+from .network import PostSpreadState, SocialNetworkSimulator, build_post_feature_matrix
+from .rewards import compute_reward
 
 try:
     from openenv import OpenEnvBase
@@ -445,3 +445,20 @@ class MisinfoGuardEnv(OpenEnvBase, gym.Env):
             "agent_budget": int(self.remaining_budget),
             "timestep": int(self.timestep),
         }
+
+    def get_state(self) -> dict[str, Any]:
+        """Get complete current state of the environment."""
+        return {
+            "observation": self._build_observation(),
+            "timestep": self.timestep,
+            "trajectory": {
+                "episode_rewards": getattr(self, "_episode_rewards", []),
+                "false_reach": getattr(self, "_false_reach", []),
+                "recall": getattr(self, "_recall", []),
+                "precision": getattr(self, "_precision", []),
+            },
+        }
+
+    def close(self) -> None:
+        """Clean up environment resources."""
+        pass

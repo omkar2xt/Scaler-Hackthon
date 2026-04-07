@@ -58,9 +58,9 @@ def check_3_environment_api():
 def check_4_grader_variability():
     """Check 4: Graders exist and return different scores."""
     try:
-        from graders.easy_grader import grade as easy_grade
-        from graders.medium_grader import grade as medium_grade
-        from graders.hard_grader import grade as hard_grade
+        from misinfoguard_env.graders.easy_grader import grade as easy_grade
+        from misinfoguard_env.graders.medium_grader import grade as medium_grade
+        from misinfoguard_env.graders.hard_grader import grade as hard_grade
         
         # Create dummy trajectory
         trajectory = {

@@ -9,8 +9,8 @@ from dataclasses import dataclass
 import networkx as nx
 import numpy as np
 
-from config import CONFIG, MisinfoGuardConfig
-from network import PostSpreadState
+from ..config import CONFIG, MisinfoGuardConfig
+from ..network import PostSpreadState
 
 
 @dataclass
