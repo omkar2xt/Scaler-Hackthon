@@ -81,4 +81,4 @@ This project is open source. See `LICENSE` for details.
 
 ## Contributors
 
-- omkar2xt
+- Omkar Raju Gurav
