@@ -9,7 +9,7 @@ from typing import Any
 import gymnasium as gym
 import numpy as np
 
-from config import CONFIG
+from .config import CONFIG
 from environment import MisinfoGuardEnv
 
 

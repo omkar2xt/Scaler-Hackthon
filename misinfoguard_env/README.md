@@ -84,11 +84,7 @@ python -c "from grader import grade_policy; print(grade_policy().to_json())"
 python inference.py
 ```
 
-Environment variables supported by inference.py:
-
-- API_BASE_URL
-- MODEL_NAME
-- HF_TOKEN
+**Note:** Inference requires LLM API credentials. See `.env.example` for configuration template and set required environment variables before running.
 
 ## Run Tests
 

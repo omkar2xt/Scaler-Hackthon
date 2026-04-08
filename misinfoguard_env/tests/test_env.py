@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from config import CONFIG
-from environment import MisinfoGuardEnv
+from ..config import CONFIG
+from ..environment import MisinfoGuardEnv
 
 
 def test_reset_returns_expected_observation_schema() -> None:
