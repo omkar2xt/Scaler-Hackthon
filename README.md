@@ -2,6 +2,13 @@
 
 An OpenEnv reinforcement learning environment for misinformation defense in social networks.
 
+## Live Deployment
+
+- **Hugging Face Space**: https://huggingface.co/spaces/omkar2xt/misinfoguard-env
+- **Space Runtime URL**: https://omkar2xt-misinfoguard-env.hf.space
+- **Health Endpoint**: `GET /health`
+- **OpenEnv Endpoints**: `POST /reset`, `POST /step`, `GET /state`
+
 ## Project Overview
 
 **MisinfoGuard-Env** simulates adversarial misinformation spreading and defender interventions on a small-world social network graph. This environment is designed for:
@@ -15,6 +22,7 @@ An OpenEnv reinforcement learning environment for misinformation defense in soci
 - **Main Project**: See [misinfoguard_env/README.md](misinfoguard_env/README.md) for full documentation
 - **Docker**: [Dockerfile](misinfoguard_env/Dockerfile) for deployment
 - **CI/CD**: [GitHub Actions](misinfoguard_env/.github/workflows/ci.yml)
+- **OpenEnv Spec**: [openenv.yaml](openenv.yaml)
 
 ## Key Features
 
@@ -76,6 +84,12 @@ See [misinfoguard_env/README.md](misinfoguard_env/README.md) for:
 - Task descriptions and baselines
 - Training and inference guides
 - Deployment instructions
+
+## Submission Status
+
+- Space is configured with Docker SDK and runs on port `7860`.
+- OpenEnv API routes are live and responding from the deployed container.
+- Submission contract files are included: `openenv.yaml`, `models.py`, and `graders/*`.
 
 ## License
 
