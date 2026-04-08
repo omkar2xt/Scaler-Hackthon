@@ -164,3 +164,15 @@ async def get_state() -> dict[str, Any]:
         except Exception as exc:
             logger.exception("Failed to get state: %s", exc)
             raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+def run_server() -> None:
+    """Console entrypoint used by openenv validators."""
+
+    import uvicorn
+
+    uvicorn.run("app:app", host="0.0.0.0", port=7860)
+
+
+if __name__ == "__main__":
+    run_server()
