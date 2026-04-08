@@ -4,7 +4,10 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 
-from .config import CONFIG, MisinfoGuardConfig
+try:
+    from .config import CONFIG, MisinfoGuardConfig
+except ImportError:
+    from config import CONFIG, MisinfoGuardConfig
 
 
 @dataclass

@@ -9,9 +9,14 @@ import gymnasium as gym
 import numpy as np
 from gymnasium import spaces
 
-from .config import CONFIG, MisinfoGuardConfig
-from .network import PostSpreadState, SocialNetworkSimulator, build_post_feature_matrix
-from .rewards import compute_reward
+try:
+    from .config import CONFIG, MisinfoGuardConfig
+    from .network import PostSpreadState, SocialNetworkSimulator, build_post_feature_matrix
+    from .rewards import compute_reward
+except ImportError:
+    from config import CONFIG, MisinfoGuardConfig
+    from network import PostSpreadState, SocialNetworkSimulator, build_post_feature_matrix
+    from rewards import compute_reward
 
 try:
     from openenv import OpenEnvBase
