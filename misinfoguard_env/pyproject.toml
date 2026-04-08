@@ -1,3 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "misinfoguard-env"
+version = "0.0.1"
+description = "OpenEnv RL environment for misinformation defense"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+	"openenv-core>=0.2.0",
+	"networkx>=3.0",
+	"numpy>=1.24",
+	"gymnasium>=0.29",
+	"stable-baselines3>=2.0",
+	"torch>=2.0",
+	"huggingface_hub",
+	"fastapi>=0.115,<0.116",
+	"uvicorn>=0.30,<0.31",
+	"pydantic>=2.0",
+	"pyyaml>=6.0",
+]
+
+[project.scripts]
+server = "app:run_server"
+
 [tool.ruff]
 line-length = 100
 target-version = "py311"
