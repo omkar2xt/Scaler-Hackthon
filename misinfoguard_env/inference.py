@@ -7,9 +7,14 @@ import os
 from pathlib import Path
 from typing import Any
 
-from .agents.defender import HeuristicDefender
-from .config import CONFIG
-from .grader import grade_policy
+try:
+    from .agents.defender import HeuristicDefender
+    from .config import CONFIG
+    from .grader import grade_policy
+except ImportError:
+    from agents.defender import HeuristicDefender
+    from config import CONFIG
+    from grader import grade_policy
 
 
 def _load_model(model_path: Path) -> Any | None:

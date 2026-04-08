@@ -8,9 +8,14 @@ from typing import Any, Protocol
 
 import numpy as np
 
-from .agents.defender import HeuristicDefender
-from .config import CONFIG, MisinfoGuardConfig
-from environment import MisinfoGuardEnv
+try:
+    from .agents.defender import HeuristicDefender
+    from .config import CONFIG, MisinfoGuardConfig
+    from .environment import MisinfoGuardEnv
+except ImportError:
+    from agents.defender import HeuristicDefender
+    from config import CONFIG, MisinfoGuardConfig
+    from environment import MisinfoGuardEnv
 
 
 class Predictor(Protocol):

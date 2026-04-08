@@ -23,7 +23,7 @@ dependencies = [
 ]
 
 [project.scripts]
-server = "app:run_server"
+server = "server.app:main"
 
 [tool.ruff]
 line-length = 100
