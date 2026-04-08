@@ -1,0 +1,49 @@
+name: MisinfoGuard-Env
+version: "0.0.1"
+author: "AI Defense Research Team"
+description: "An OpenEnv RL environment for training agents to detect and mitigate misinformation spread in social networks using content moderation and quarantine strategies."
+
+interface:
+  observation_type: object
+  action_type: object
+  reward_type: object
+
+tasks:
+  easy:
+    name: "Easy Misinformation Detection"
+    description: "Detect and quarantine misinformation with low network density and weak spreader agents."
+    grader: "graders.easy_grader"
+    config:
+      network_size: 50
+      network_density: 0.1
+      spreader_strength: 0.3
+
+  medium:
+    name: "Medium Misinformation Defense"
+    description: "Defend against misinformation in a moderate-density network with balanced adversaries."
+    grader: "graders.medium_grader"
+    config:
+      network_size: 100
+      network_density: 0.15
+      spreader_strength: 0.6
+
+  hard:
+    name: "Hard Misinformation Containment"
+    description: "Contain sophisticated misinformation campaigns in a dense network with strong spreader agents."
+    grader: "graders.hard_grader"
+    config:
+      network_size: 150
+      network_density: 0.20
+      spreader_strength: 0.9
+
+environment_variables:
+  - OPENAI_API_KEY
+  - API_BASE_URL
+  - MODEL_NAME
+  - HF_TOKEN
+
+evaluation_criteria:
+  - "Episode reward maximization"
+  - "False information reach minimization"
+  - "Precision in quarantine decisions"
+  - "Training convergence speed"

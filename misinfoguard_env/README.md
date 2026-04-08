@@ -1,3 +1,13 @@
+---
+title: MisinfoGuard Env
+emoji: "🛡️"
+colorFrom: blue
+colorTo: red
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # MisinfoGuard-Env
 
 MisinfoGuard-Env is a production-style OpenEnv reinforcement learning environment for misinformation defense in social networks. It simulates adversarial spread and defender interventions over a small-world graph.
