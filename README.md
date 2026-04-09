@@ -1,3 +1,12 @@
+---
+title: MisinfoGuard-Env
+emoji: shield
+colorFrom: blue
+colorTo: green
+sdk: docker
+pinned: false
+---
+
 # Scaler-Hackthon: MisinfoGuard-Env
 
 An OpenEnv reinforcement learning environment for misinformation defense in social networks.
