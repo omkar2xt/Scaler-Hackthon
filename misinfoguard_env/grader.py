@@ -52,9 +52,25 @@ def _predict_action(policy: Any, observation: dict[str, Any]) -> int:
     """Extract action from either SB3 model or heuristic policy."""
 
     if hasattr(policy, "predict"):
-        result = policy.predict(observation, deterministic=True)
+        predict_fn = policy.predict
+        try:
+            result = predict_fn(observation, deterministic=True)
+        except TypeError:
+            result = predict_fn(observation)
+
         if isinstance(result, tuple):
-            return int(result[0])
+            result = result[0]
+
+        if isinstance(result, np.ndarray):
+            if result.size == 0:
+                raise ValueError("Policy returned an empty action array")
+            result = result.reshape(-1)[0]
+
+        if isinstance(result, list):
+            if not result:
+                raise ValueError("Policy returned an empty action list")
+            result = result[0]
+
         return int(result)
     raise TypeError("Policy object must expose a predict method")
 

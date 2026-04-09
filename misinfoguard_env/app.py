@@ -10,7 +10,10 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from environment import MisinfoGuardEnv
+try:
+    from .environment import MisinfoGuardEnv
+except ImportError:
+    from environment import MisinfoGuardEnv
 
 logger = logging.getLogger(__name__)
 
@@ -62,7 +65,20 @@ class ResetRequest(BaseModel):
 
 
 class StepRequest(BaseModel):
-    action: int
+    action: int | dict[str, Any]
+
+
+def _extract_action(payload: int | dict[str, Any]) -> int:
+    """Support both direct discrete actions and wrapped action payloads."""
+
+    if isinstance(payload, int):
+        return payload
+    if isinstance(payload, dict):
+        if "action" in payload:
+            return int(payload["action"])
+        if "action_idx" in payload:
+            return int(payload["action_idx"])
+    raise ValueError("Invalid action payload; expected int or {'action': int}")
 
 
 @app.on_event("startup")
@@ -91,6 +107,7 @@ async def health_check() -> dict[str, Any]:
 
 @app.post("/reset")
 async def reset_env(request: ResetRequest | None = None) -> dict[str, Any]:
+    """Reset the environment."""
     global env_instance
     if env_instance is None:
         with env_lock:
@@ -133,7 +150,8 @@ async def step_env(request: StepRequest) -> dict[str, Any]:
 
     with env_lock:
         try:
-            observation, reward, terminated, truncated, info = env_instance.step(request.action)
+            action = _extract_action(request.action)
+            observation, reward, terminated, truncated, info = env_instance.step(action)
             return _to_json_safe({
                 "observation": observation,
                 "reward": float(reward),
