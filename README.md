@@ -1,6 +1,6 @@
 ---
 title: MisinfoGuard-Env
-emoji: shield
+emoji: 🛡
 colorFrom: blue
 colorTo: green
 sdk: docker
