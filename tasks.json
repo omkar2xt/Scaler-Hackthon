@@ -1,0 +1,14 @@
+[
+  {
+    "task_id": "task_1",
+    "grader": "grade"
+  },
+  {
+    "task_id": "task_2",
+    "grader": "grade"
+  },
+  {
+    "task_id": "task_3",
+    "grader": "grade"
+  }
+]
