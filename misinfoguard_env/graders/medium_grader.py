@@ -4,6 +4,12 @@ Scores agent performance on moderate-density, balanced-spreader scenarios.
 """
 
 
+def _strict_unit_interval(value: float, eps: float = 1e-6) -> float:
+    """Clamp score into strict (0, 1) interval required by validator."""
+
+    return min(1.0 - eps, max(eps, float(value)))
+
+
 def grade(trajectory: dict) -> float:
     """
     Grade agent performance on medium task.
@@ -19,7 +25,7 @@ def grade(trajectory: dict) -> float:
         float: Score in range [0.0, 1.0]
     """
     if not trajectory:
-        return 0.0
+        return _strict_unit_interval(0.05)
 
     episode_rewards = trajectory.get("episode_rewards", [0])
     false_reach = trajectory.get("false_reach", [1.0])
@@ -43,4 +49,4 @@ def grade(trajectory: dict) -> float:
         + 0.20 * precision_score
     )
 
-    return min(1.0, max(0.0, score))
+    return _strict_unit_interval(score)
