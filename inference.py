@@ -36,6 +36,27 @@ def _load_model(model_path: Path) -> Any | None:
         return None
 
 
+def _probe_llm_proxy(api_base_url: str, api_key: str, model_name: str) -> bool:
+    """Send a minimal OpenAI-compatible request through the provided proxy."""
+
+    if not api_base_url or not api_key:
+        return False
+
+    try:
+        from openai import OpenAI
+
+        client = OpenAI(base_url=api_base_url, api_key=api_key)
+        client.chat.completions.create(
+            model=model_name,
+            messages=[{"role": "user", "content": "Return OK"}],
+            max_tokens=2,
+            temperature=0,
+        )
+        return True
+    except Exception:
+        return False
+
+
 def main() -> None:
     """Run a single graded episode and print parser-friendly structured logs."""
 
@@ -49,8 +70,13 @@ def main() -> None:
 
     try:
         api_base_url = os.getenv("API_BASE_URL", "")
+        api_key = os.getenv("API_KEY", os.getenv("OPENAI_API_KEY", ""))
         model_name = os.getenv("MODEL_NAME", "misinfoguard-ppo")
         hf_token = os.getenv("HF_TOKEN", "")
+
+        proxy_ok = _probe_llm_proxy(api_base_url=api_base_url, api_key=api_key, model_name=model_name)
+        print(f"[STEP] step=llm_proxy_call ok={int(proxy_ok)}", flush=True)
+        sys.stdout.flush()
 
         if hf_token:
             try:
