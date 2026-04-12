@@ -37,10 +37,9 @@ def _load_model(model_path: Path) -> Any | None:
 
 
 def main() -> None:
-    """Run a single graded episode and print result JSON with structured logging."""
+    """Run a single graded episode and print parser-friendly structured logs."""
 
-    # START marker for structured logging
-    print(json.dumps({"marker": "START", "event": "inference_begin"}))
+    print("[START] task=misinfoguard episodes=1", flush=True)
 
     api_base_url = os.getenv("API_BASE_URL", "")
     model_name = os.getenv("MODEL_NAME", "misinfoguard-ppo")
@@ -57,18 +56,14 @@ def main() -> None:
     model = _load_model(CONFIG.paths.best_model_path)
     policy = model if model is not None else HeuristicDefender()
 
-    # STEP marker: policy loaded
-    print(json.dumps({"marker": "STEP", "event": "policy_loaded", "policy_type": type(policy).__name__}))
+    print(f"[STEP] step=policy_loaded policy={type(policy).__name__}", flush=True)
 
     result = grade_policy(policy=policy, episodes=1, config=CONFIG)
 
-    # STEP marker: grading complete
-    print(json.dumps({"marker": "STEP", "event": "grading_complete", "result": result.to_dict() if hasattr(result, 'to_dict') else str(result)}))
+    print(f"[STEP] step=grading_complete score={result.final_score:.6f}", flush=True)
+    print(f"[END] task=misinfoguard score={result.final_score:.6f} steps=1", flush=True)
 
-    # END marker: inference complete
-    print(json.dumps({"marker": "END", "event": "inference_end"}))
-
-    print(result.to_json())
+    print(result.to_json(), flush=True)
 
     if api_base_url or model_name:
         _ = (api_base_url, model_name)
