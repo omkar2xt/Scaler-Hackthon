@@ -12,7 +12,7 @@ tasks:
   easy:
     name: "Easy Misinformation Detection"
     description: "Detect and quarantine misinformation with low network density and weak spreader agents."
-    grader: "misinfoguard_env.graders.easy_grader"
+    grader: "grade"
     config:
       network_size: 50
       network_density: 0.1
@@ -21,7 +21,7 @@ tasks:
   medium:
     name: "Medium Misinformation Defense"
     description: "Defend against misinformation in a moderate-density network with balanced adversaries."
-    grader: "misinfoguard_env.graders.medium_grader"
+    grader: "grade"
     config:
       network_size: 100
       network_density: 0.15
@@ -30,7 +30,7 @@ tasks:
   hard:
     name: "Hard Misinformation Containment"
     description: "Contain sophisticated misinformation campaigns in a dense network with strong spreader agents."
-    grader: "misinfoguard_env.graders.hard_grader"
+    grader: "grade"
     config:
       network_size: 150
       network_density: 0.20
